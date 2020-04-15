@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dia de los Muertos Coloring Book</title>
+    <style>
+      body {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        background-color: rgb(180, 180, 180);
+        font-family: sans-serif;
+        letter-spacing: 2px;
+      }
+      #theSVG {
+        margin-top: 10vh;
+      }
+
+      #theSVG svg {
+        height: 80vh;
+        width: 80vw;
+        background-color: white;
+        -webkit-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+      }
+      h3 {
+        text-align: center;
+      }
+
+      #palette {
+        margin: 2vw;
+      }
+      .selected-container {
+        display: grid;
+        justify-items: center;
+      }
+
+      .palette-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: 2vh;
+        justify-items: center;
+      }
+      .box {
+        width: 60px;
+        height: 60px;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 10%;
+        -webkit-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        cursor: pointer;
+      }
+      .box:hover {
+        transform: scale(1.05);
+      }
+      .box1 {
+        background-color: #f2ee2d;
+      }
+      .box2 {
+        background-color: #ff7d1f;
+      }
+      .box3 {
+        background-color: #81d3f5;
+      }
+      .box4 {
+        background-color: #24905f;
+      }
+      .box5 {
+        background-color: #e12026;
+      }
+      .box6 {
+        background-color: #ed008c;
+      }
+      .box7 {
+        background-color: #313131;
+      }
+      .box8 {
+        background-color: #f2ebcb;
+      }
+      .selected {
+        width: 100px;
+        height: 100px;
+        background-color: var(--selected);
+      }
+      button {
+        background-color: white;
+        border: 2px solid rgb(255, 255, 255);
+        font-family: sans-serif;
+        letter-spacing: 2px;
+        margin: 0 6px;
+        padding: 5px;
+        -webkit-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+      }
+      button:hover {
+        transform: scale(1.02);
+        cursor: pointer;
+      }
+      button:active {
+        background-color: rgb(192, 192, 192);
+      }
+      #selector {
+        display: flex;
+        align-items: center;
+      }
+
+      svg #fills {
+        transition: fill 1s ease;
+      }
+      svg #fills > *:hover {
+        cursor: pointer;
+        fill: rgb(243, 243, 243);
+      }
+      .save {
+        background-color: white;
+        margin-top: 5vh;
+        padding: 5px 15px;
+      }
+      .switch {
+        margin-top: 5vh;
+      }
+      .flex {
+        display: flex;
+      }
+      input {
+        transform: scaleY(1.6);
+        -webkit-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.75);
+        cursor: pointer;
+      }
+      input:hover {
+        transform: scaleY(1.7) scaleX(1.02);
+      }
+      p {
+        margin: 5px 0px;
+        font-size: 0.8rem;
+      }
+      .selected-header {
+        margin-bottom: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="palette">
+      <h3>Select color:</h3>
+      <section id="selector">
+        <input type="color" value="#8a77f1" id="color_picker" />
+        <button data-type="add_swatch">Add Color to Swatches</button>
+      </section>
+
+      <h3>Swatches</h3>
+      <div class="palette-grid">
+        <div class="box1 box" data-type="swatch"></div>
+        <div class="box2 box" data-type="swatch"></div>
+        <div class="box3 box" data-type="swatch"></div>
+        <div class="box4 box" data-type="swatch"></div>
+        <div class="box5 box" data-type="swatch"></div>
+        <div class="box6 box" data-type="swatch"></div>
+        <div class="box7 box" data-type="swatch"></div>
+        <div class="box8 box" data-type="swatch"></div>
+      </div>
+      <section class="selected-container">
+        <h4 class="selected-header">Selected Color</h4>
+        <p>#8a77f1</p>
+        <div class="box selected"></div>
+        <div class="flex">
+          <button class="save" data-type="save">Save</button>
+          <button class="switch" data-type="switch">Switch Image</button>
+        </div>
+      </section>
+    </section>
+    <div id="theSVG"></div>
+
+    <template>
+      <div class="box" data-type="swatch"></div>
+    </template>
+    <script src="script.js"></script>
+  </body>
+</html>
